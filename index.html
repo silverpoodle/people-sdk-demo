@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px; 
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        main {
+            padding: 20px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 800px; 
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+
+       
+        .welcome-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .welcome-text {
+            font-size: 3em; 
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .welcome-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        
+        @media (max-width: 768px) {
+            .welcome-text {
+                font-size: 2em;
+            }
+        }
+        @media (max-width: 480px) {
+            .welcome-text {
+                font-size: 1.5em;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+
+    <!-- Infobip People & Events Web SDK Start -->
+    <script>
+    (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+    (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+
+    // Infobip People & Events Web SDK API 키를 여기에 입력하세요.
+    // 이 키는 Infobip Portal에서 Web SDK용으로 발급받은 키여야 합니다.
+    pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec');
+    </script>
+    <!-- Infobip People & Events Web SDK End -->
+
+    <!-- Infobip Live Chat 챗봇 Start -->
+    <script>
+    (function(I,n,f,o,b,i,p){
+    I[b]=I[b]||function(){(I[b].q=I[b].q||[]).push(arguments)};
+    I[b].t=1*new Date();i=n.createElement(f);i.async=1;i.src=o;
+    p=n.getElementsByTagName(f)[0];p.parentNode.insertBefore(i,p)})
+    (window,document,'script','https://livechat.infobip.com/widget.js','liveChat');
+
+    liveChat('init', 'e53f50d1-eb76-472a-ba8e-9f3d2cd48a41'); // 챗봇 위젯 초기화 코드
+    </script>
+    <!-- Infobip Live Chat 챗봇 End -->
+
+</head>
+<body>
+    <header>
+        <h1>홈페이지</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="products.html">상품</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="welcome-section">
+        <p class="welcome-text"><span id="welcomeName"></span>님, 환영합니다!</p>
+        <!-- 이미지는 S3 버킷에 업로드 후 해당 URL로 변경해주세요. -->
+        <img src="https://s3.ap-northeast-2.amazonaws.com/img/" alt="환영 이미지" class="welcome-image">
+    </main>
+
+    <footer>
+        <p>&copy; 인포빕 데모 웹사이트</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // 환영 메시지에 사용자 이름을 업데이트하는 함수입니다.
+        function updateWelcomeName(name = '') {
+            const welcomeNameSpan = document.getElementById('welcomeName');
+            if (name) {
+                welcomeNameSpan.textContent = `${name}`;
+            } else {
+                welcomeNameSpan.textContent = ''; // 이름이 없으면 빈 문자열
+            }
+        }
+
+        window.onload = function() {
+            // 웹사이트 로드 시 사용자 식별을 시도하고, 환영 메시지를 업데이트합니다.
+            // 실제 애플리케이션에서는 서버로부터 로그인한 사용자 정보를 가져와야 합니다.
+            // 여기서는 데모를 위해 하드코딩된 예시 값을 사용합니다.
+            const loggedInUser = {
+                firstName: '상원',
+                lastName: '황',   
+                phone: '821039034952',
+                email: 'sangwon.hwang@infobip.com'
+            };
+
+            // Infobip People & Events Web SDK 초기화 및 Person 설정
+            // pe.setPerson()은 externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
+            // 따라서 `if (loggedInUser.externalId)` 조건문 없이 바로 호출합니다.
+            pe.setPerson(loggedInUser);
+            // Person이 email/phone으로 식별되었음을 콘솔에 출력합니다.
+            console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
+            
+            // 로그인 이벤트를 추적합니다. (페이지 로드 시 자동 로그인으로 간주)
+            pe.track('Login', { method: 'automatic' }); 
+            
+            // 환영 메시지에 사용자의 전체 이름을 표시합니다.
+            updateWelcomeName(loggedInUser.lastName + loggedInUser.firstName); 
+        };
+    </script>
+</body>
+</html>

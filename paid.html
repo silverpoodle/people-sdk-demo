@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        main.thank-you-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+        .thank-you-text {
+            font-size: 3em; 
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .thank-you-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+ 
+        @media (max-width: 768px) {
+            .thank-you-text {
+                font-size: 2em;
+            }
+        }
+        @media (max-width: 480px) {
+            .thank-you-text {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+
+    <!-- Infobip Web SDK Start -->
+    <script>
+    (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+    (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+
+    pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec'); // <-- 실제 API 키를 입력하세요!
+    </script>
+    <!-- Infobip Web SDK End -->
+</head>
+<body>
+    <header>
+        <h1>결제 완료!</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="products.html">상품</a></li>
+            </ul>
+        </nav>
+       
+    </header>
+
+    <main class="thank-you-section">
+        <p class="thank-you-text">감사합니다!</p>
+        <!-- 이미지는 S3 버킷에 업로드 후 해당 URL로 변경해주세요. -->
+        <img src="https://infobip-demo-website.s3.ap-northeast-2.amazonaws.com/img/" alt="감사 이미지" class="thank-you-image">
+    </main>
+
+    <footer>
+        <p>&copy; 인포빕 데모 웹사이트</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            // 인덱스 페이지와 동일한 사용자 정보로 Person 식별 로직 통일
+            const loggedInUser = {
+                firstName: '상원', 
+                lastName: '황', 
+                email: 'sangwon.hwang@infobip.com',
+                phone: '+821039034952' 
+            };
+
+            pe.setPerson(loggedInUser);
+            console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
+            
+            // 페이지 로드 이벤트 추적
+            pe.track('Page Loaded', { page: 'Paid Confirmation', url: window.location.href });
+            console.log('Infobip: Page Loaded event tracked for Paid Confirmation.');
+        };
+    </script>
+</body>
+</html>

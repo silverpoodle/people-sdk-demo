@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Infobip Web SDK Start -->
+    <script>
+    (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+    (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+
+    pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec'); // <-- 실제 API 키를 입력하세요!
+    </script>
+    <!-- Infobip Web SDK End -->
+
+    <!-- Infobip Live Chat 챗봇 Start -->
+    <script>
+    (function(I,n,f,o,b,i,p){
+    I[b]=I[b]||function(){(I[b].q=I[b].q||[]).push(arguments)};
+    I[b].t=1*new Date();i=n.createElement(f);i.async=1;i.src=o;
+    p=n.getElementsByTagName(f)[0];p.parentNode.insertBefore(i,p)})
+    (window,document,'script','https://livechat.infobip.com/widget.js','liveChat');
+
+    liveChat('init', 'e53f50d1-eb76-472a-ba8e-9f3d2cd48a41'); // 챗봇 위젯 초기화 코드
+    </script>
+    <!-- Infobip Live Chat 챗봇 End -->
+
+</head>
+<body>
+    <header>
+        <h1>상품페이지</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="products.html">상품</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <p>다양한 상품들을 만나보세요.</p>
+        <ul>
+            <li>
+                상품 A - ₩10,000
+                <button onclick="addProductToCart('상품 A', 10000)">장바구니 담기</button>
+            </li>
+            <li>
+                상품 B - ₩25,000
+                <button onclick="addProductToCart('상품 B', 25000)">장바구니 담기</button>
+            </li>
+        </ul>
+        <br>
+        <button onclick="location.href='checkout.html'">결제하러 가기</button>
+    </main>
+
+    <footer>
+        <p>&copy; 인포빕 데모 웹사이트</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        window.onload = function() {
+            // 인덱스 페이지와 동일한 사용자 정보로 Person 식별 로직 통일
+            const loggedInUser = {
+                firstName: '상원', 
+                lastName: '황',   
+                email: 'sangwon.hwang@infobip.com',
+                phone: '+821039034952' 
+            };
+
+            // externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
+            pe.setPerson(loggedInUser);
+            console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
+            
+            // 페이지 로드 이벤트 추적
+            pe.track('Page Loaded', { page: 'Products', url: window.location.href });
+            console.log('Infobip: Page Loaded event tracked for Products page.');
+        };
+
+        function addProductToCart(productName, price) {
+            // Infobip: 'Product Added' 이벤트 추적
+            pe.track('OnCart', {
+                productName: productName,
+                productPrice: price,
+                cartQuantity: 1 // 예시: 1개
+            });
+            console.log(productName + '이(가) 장바구니에 추가되었습니다! 이벤트 추적 완료.');
+        }
+    </script>
+</body>
+</html>
