@@ -78,8 +78,7 @@
                 email: 'dillyson@naver.com'
             };
 
-
-            pe.setPerson(loggedInUser);
+            pe.setPerson({ email: loggedInUser.email });
             console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
             
             // 페이지 로드 이벤트 추적
