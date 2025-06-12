@@ -165,25 +165,27 @@
             // 웹사이트 로드 시 사용자 식별을 시도하고, 환영 메시지를 업데이트합니다.
             // 실제 애플리케이션에서는 서버로부터 로그인한 사용자 정보를 가져와야 합니다.
             // 여기서는 데모를 위해 하드코딩된 예시 값을 사용합니다.
-            const loggedInUser = {
-                firstName: '상원',
-                lastName: '황',   
-                phone: '821039034952',
-                email: 'sangwon.hwang@infobip.com'
+            const loggedInUser = { 
+                phone: '821092595897',
+                email: 'dillyson@naver.com'
             };
 
             // Infobip People & Events Web SDK 초기화 및 Person 설정
             // pe.setPerson()은 externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
             // 따라서 `if (loggedInUser.externalId)` 조건문 없이 바로 호출합니다.
-            pe.setPerson(loggedInUser);
+
+            
+            pe.setPerson({ email: 'dillyson@naver.com' });
+            
             // Person이 email/phone으로 식별되었음을 콘솔에 출력합니다.
             console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
             
             // 로그인 이벤트를 추적합니다. (페이지 로드 시 자동 로그인으로 간주)
-            pe.track('Login', { method: 'automatic' }); 
+            pe.track('Login', { loginDate: new Date() });
+            // pe.track('Login', { method: 'automatic' }); 
             
             // 환영 메시지에 사용자의 전체 이름을 표시합니다.
-            updateWelcomeName(loggedInUser.lastName + loggedInUser.firstName); 
+            updateWelcomeName(loggedInUser.email); 
         };
     </script>
 </body>
