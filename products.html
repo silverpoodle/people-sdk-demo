@@ -79,7 +79,7 @@
 
         function addProductToCart(productName, price) {
             // Infobip: 'Product Added' 이벤트 추적
-            pe.track('OnCart2', {
+            pe.track('OnCart', {
                 productName: productName,
                 productPrice: price,
                 cartQuantity: 1 // 예시: 1개
