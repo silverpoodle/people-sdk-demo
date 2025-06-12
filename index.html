@@ -181,7 +181,8 @@
             console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
             
             // 로그인 이벤트를 추적합니다. (페이지 로드 시 자동 로그인으로 간주)
-            pe.track('Login', { method: 'automatic' }); 
+            pe.track('Login', { loginDate: new Date() });
+            // pe.track('Login', { method: 'automatic' }); 
             
             // 환영 메시지에 사용자의 전체 이름을 표시합니다.
             updateWelcomeName(loggedInUser.email); 
