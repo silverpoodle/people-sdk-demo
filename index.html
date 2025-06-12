@@ -175,7 +175,12 @@
             // Infobip People & Events Web SDK 초기화 및 Person 설정
             // pe.setPerson()은 externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
             // 따라서 `if (loggedInUser.externalId)` 조건문 없이 바로 호출합니다.
-            pe.setPerson(loggedInUser);
+
+            
+            // pe.setPerson(loggedInUser);
+            pe.setPerson({ email: 'sangwon.hwang@infobip.com' });
+            console.log('===setPerson with Email===');
+            
             // Person이 email/phone으로 식별되었음을 콘솔에 출력합니다.
             console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
             
