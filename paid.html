@@ -73,12 +73,11 @@
     <script>
         window.onload = function() {
             // 인덱스 페이지와 동일한 사용자 정보로 Person 식별 로직 통일
-            const loggedInUser = {
-                firstName: '상원', 
-                lastName: '황', 
-                email: 'sangwon.hwang@infobip.com',
-                phone: '+821039034952' 
+            const loggedInUser = { 
+                phone: '821092595897',
+                email: 'dillyson@naver.com'
             };
+
 
             pe.setPerson(loggedInUser);
             console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
