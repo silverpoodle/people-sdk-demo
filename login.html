@@ -33,9 +33,7 @@
   <main>
     <form id="loginForm">
       <label>Email: <input type="email" id="email" required></label><br><br>
-      <button onclick="loginWithEmail">Login</button>
-
-      
+      <button type="button" onclick="loginWithEmail()">Login</button>
     </form>
   </main>
 
@@ -47,10 +45,10 @@
 
     function loginWithEmail() {
         const email = document.getElementById('email').value;
+        console.log(email);
         pe.setPerson({ email: email });
         window.location.href = 'index.html';
     }
-
   </script>
 </body>
 </html>
