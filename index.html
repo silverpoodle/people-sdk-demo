@@ -167,7 +167,7 @@
             // 로그인 로직에 따라 해당 조건은 수정해주세요.
             const peStateStr = localStorage.getItem('PE:state');
             const peState = JSON.parse(peStateStr);
-            if (!peState.person.id || !peState.visitor.id) {
+            if (!peState.person.id) {
                 window.location.href = 'login.html';
                 return;
             }
