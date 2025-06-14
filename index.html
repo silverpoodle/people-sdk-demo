@@ -143,6 +143,11 @@
         <p class="welcome-text"><span id="welcomeName"></span>님, 환영합니다!</p>
         <!-- 이미지는 S3 버킷에 업로드 후 해당 URL로 변경해주세요. -->
         <img src="https://cdn-web.infobip.com/uploads/2025/04/infobip-haas-f-hp-desktop-v-opt.png" alt="환영 이미지" class="welcome-image">
+        
+        <button id="goToLoginBtn" style="margin-top: 30px; padding: 10px 20px; font-size: 1em; border: none; border-radius: 5px; background-color: #007bff; color: white; cursor: pointer;">
+            로그인 페이지로 이동
+        </button>
+        
     </main>
 
     <footer>
@@ -163,18 +168,14 @@
 
         window.onload = function() {
 
-            // 사용자 로그인 여부를 확인합니다.
-            // 로그인 로직에 따라 해당 조건은 수정해주세요.
-            const peStateStr = localStorage.getItem('PE:state');
-            const peState = JSON.parse(peStateStr);
-            if (!peState.person.id) {
-                window.location.href = 'login.html';
-                return;
-            }
-
             // 환영 메시지에 사용자의 전체 이름을 표시합니다.
             updateWelcomeName(peState.person.id); 
         };
+
+        document.getElementById('goToLoginBtn').addEventListener('click', function () {
+            window.location.href = 'login.html';
+        });
+
     </script>
 </body>
 </html>
