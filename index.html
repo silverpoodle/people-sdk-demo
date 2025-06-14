@@ -111,7 +111,7 @@
 
     // Infobip People & Events Web SDK API 키를 여기에 입력하세요.
     // 이 키는 Infobip Portal에서 Web SDK용으로 발급받은 키여야 합니다.
-    pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec');
+    pe.init('afae6d1c6a9e9f68c279f10a46a90b9b-8b0a63b4-926b-40a7-984c-611c3e0e69c8');
     </script>
     <!-- Infobip People & Events Web SDK End -->
 
@@ -130,7 +130,7 @@
 </head>
 <body>
     <header>
-        <h1>홈페이지</h1>
+        <h1>Home</h1>
         <nav>
             <ul>
                 <li><a href="index.html">홈</a></li>
@@ -142,11 +142,11 @@
     <main class="welcome-section">
         <p class="welcome-text"><span id="welcomeName"></span>님, 환영합니다!</p>
         <!-- 이미지는 S3 버킷에 업로드 후 해당 URL로 변경해주세요. -->
-        <img src="https://s3.ap-northeast-2.amazonaws.com/img/" alt="환영 이미지" class="welcome-image">
+        <img src="https://cdn-web.infobip.com/uploads/2025/04/infobip-haas-f-hp-desktop-v-opt.png" alt="환영 이미지" class="welcome-image">
     </main>
 
     <footer>
-        <p>&copy; 인포빕 데모 웹사이트</p>
+        <p>&copy; Infobip Demo Website</p>
     </footer>
 
     <script src="js/script.js"></script>
@@ -162,30 +162,18 @@
         }
 
         window.onload = function() {
-            // 웹사이트 로드 시 사용자 식별을 시도하고, 환영 메시지를 업데이트합니다.
-            // 실제 애플리케이션에서는 서버로부터 로그인한 사용자 정보를 가져와야 합니다.
-            // 여기서는 데모를 위해 하드코딩된 예시 값을 사용합니다.
-            const loggedInUser = { 
-                phone: '821092595897',
-                email: 'dillyson@naver.com'
-            };
 
-            // Infobip People & Events Web SDK 초기화 및 Person 설정
-            // pe.setPerson()은 externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
-            // 따라서 `if (loggedInUser.externalId)` 조건문 없이 바로 호출합니다.
+            // 사용자 로그인 여부를 확인합니다.
+            // 로그인 로직에 따라 해당 조건은 수정해주세요.
+            const peStateStr = localStorage.getItem('PE:state');
+            const peState = JSON.parse(peStateStr);
+            if (!peState.person.id || !peState.visitor.id) {
+                window.location.href = 'login.html';
+                return;
+            }
 
-            
-            pe.setPerson({ email: 'dillyson@naver.com' });
-            
-            // Person이 email/phone으로 식별되었음을 콘솔에 출력합니다.
-            console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
-            
-            // 로그인 이벤트를 추적합니다. (페이지 로드 시 자동 로그인으로 간주)
-            pe.track('Login', { loginDate: new Date() });
-            // pe.track('Login', { method: 'automatic' }); 
-            
             // 환영 메시지에 사용자의 전체 이름을 표시합니다.
-            updateWelcomeName(loggedInUser.email); 
+            updateWelcomeName(peState.person.id); 
         };
     </script>
 </body>

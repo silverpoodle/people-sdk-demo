@@ -11,7 +11,7 @@
     (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
     (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
 
-    pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec'); // <-- 실제 API 키를 입력하세요!
+    pe.init('afae6d1c6a9e9f68c279f10a46a90b9b-8b0a63b4-926b-40a7-984c-611c3e0e69c8');
     </script>
     <!-- Infobip Web SDK End -->
 
@@ -30,7 +30,7 @@
 </head>
 <body>
     <header>
-        <h1>상품페이지</h1>
+        <h1>Product</h1>
         <nav>
             <ul>
                 <li><a href="index.html">홈</a></li>
@@ -71,11 +71,7 @@
             // externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
             // pe.setPerson({ email: 'dillyson@naver.com' });
             console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
-            
-            // 페이지 로드 이벤트 추적
-            // pe.track('Page Loaded', { page: 'Products', url: window.location.href });
-            console.log('Infobip: Page Loaded event tracked for Products page.');
-        };
+s        };
 
         function addProductToCart(productName, price) {
             // Infobip: 'Product Added' 이벤트 추적

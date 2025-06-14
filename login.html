@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Infobip People & Events Web SDK -->
+  <script>
+    (function(e,t,n,o){
+      e.PeopleEventsObject=o;
+      e[o]=e[o]||{
+        init:function(t){e[o].apiKey=t},
+        setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},
+        forgetPerson:function(){e[o].toForgetPerson=true},
+        track:function(){(e[o].q=e[o].q||[]).push(arguments)},
+        updatePerson:function(t){e[o].personToUpdate={person:t}},
+        appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}
+      };
+      var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];
+      r.async=1;r.src=n;s.parentNode.insertBefore(r,s)
+    })(window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+
+    pe.init('afae6d1c6a9e9f68c279f10a46a90b9b-8b0a63b4-926b-40a7-984c-611c3e0e69c8');
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Login</h1>
+  </header>
+
+  <main>
+    <form id="loginForm">
+      <label>Email: <input type="email" id="email" required></label><br><br>
+      <button type="submit">Login</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; Infobip Demo Website</p>
+  </footer>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+
+      // Infobip SDK에 Person 설정
+      pe.setPerson({ email: phoneNo });
+
+      window.location.href = 'index.html'; // 로그인 후 홈으로 이동
+    });
+  </script>
+</body>
+</html>
