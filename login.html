@@ -33,7 +33,9 @@
   <main>
     <form id="loginForm">
       <label>Email: <input type="email" id="email" required></label><br><br>
-      <button type="submit">Login</button>
+      <button onclick="loginWithEmail">Login</button>
+
+      
     </form>
   </main>
 
@@ -42,16 +44,12 @@
   </footer>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
 
-      const email = document.getElementById('email').value.trim();
-
-      // Infobip SDK에 Person 설정
-      pe.setPerson({ email: phoneNo });
-
-      window.location.href = 'index.html'; // 로그인 후 홈으로 이동
-    });
+    function loginWithEmail() {
+        const email = document.getElementById('email').value;
+        pe.setPerson({ email: email });
+        window.location.href = 'index.html';
+    }
   </script>
 </body>
 </html>
