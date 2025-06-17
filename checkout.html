@@ -52,16 +52,6 @@
     <script src="js/script.js"></script>
     <script>
         window.onload = function() {
-            // 인덱스 페이지와 동일한 사용자 정보로 Person 식별 로직 통일
-            const loggedInUser = {
-                email: 'dillyson@naver.com', 
-                phone: '821092595897' 
-            };
-
-            // externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
-            // pe.setPerson({ email: 'dillyson@naver.com' });
-            console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
-            
             // pe.track('Page Loaded', { page: 'Checkout', url: window.location.href });
             console.log('Infobip: Page Loaded event tracked for Checkout page.');
         };
@@ -70,7 +60,7 @@
             // 실제로는 여기에서 결제 API 호출 로직이 들어가고, 성공 시 아래 코드를 실행합니다.
             // 데모이므로 바로 이벤트 추적 및 페이지 이동.
 
-            pe.track('CheckOut2', { checkout: true });
+            pe.track('CheckOut', { checkout: true });
             console.log('결제를 시도했습니다! 이벤트가 추적되었습니다.');
 
             // 결제 완료 이벤트 추적 후 paid.html 페이지로 리디렉션

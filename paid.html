@@ -72,15 +72,6 @@
 
     <script>
         window.onload = function() {
-            // 인덱스 페이지와 동일한 사용자 정보로 Person 식별 로직 통일
-            const loggedInUser = { 
-                phone: '821092595897',
-                email: 'dillyson@naver.com'
-            };
-
-            // pe.setPerson({ email: 'dillyson@naver.com' });
-            console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
-            
             // 페이지 로드 이벤트 추적
             // pe.track('Page Loaded', { page: 'Paid Confirmation', url: window.location.href });
             console.log('Infobip: Page Loaded event tracked for Paid Confirmation.');

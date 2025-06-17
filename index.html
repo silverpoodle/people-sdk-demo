@@ -12,6 +12,9 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
@@ -25,11 +28,20 @@
             margin: 0;
         }
 
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         nav ul {
             list-style: none;
             padding: 0;
+            margin: 0;
             display: flex;
-            justify-content: center;
             gap: 15px; 
         }
 
@@ -45,31 +57,64 @@
             background-color: #555;
         }
 
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        #goToLoginBtn, #goToLogoutBtn {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #goToLoginBtn {
+            background-color: #007bff;
+        }
+
+        #goToLoginBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #goToLogoutBtn {
+            background-color: #dc3545;
+        }
+
+        #goToLogoutBtn:hover {
+            background-color: #c82333;
+        }
+
         main {
+            flex: 1;
             padding: 20px;
-            margin: 20px auto;
+            margin: 20px auto 0;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 800px; 
+            max-width: 800px;
+            width: calc(100% - 40px);
             text-align: center;
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            margin-top: 20px;
             background-color: #333;
             color: #fff;
+            margin-top: auto;
         }
 
-       
         .welcome-section {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 400px;
+            margin-bottom: 30px;
         }
 
         .welcome-text {
@@ -87,12 +132,27 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        
         @media (max-width: 768px) {
             .welcome-text {
                 font-size: 2em;
             }
+            
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                order: 1;
+            }
+            
+            .nav-buttons {
+                order: 2;
+                flex-direction: column;
+                gap: 5px;
+            }
         }
+        
         @media (max-width: 480px) {
             .welcome-text {
                 font-size: 1.5em;
@@ -136,57 +196,96 @@
                 <li><a href="index.html">홈</a></li>
                 <li><a href="products.html">상품</a></li>
             </ul>
+            <div class="nav-buttons">
+                <button id="goToLoginBtn">로그인</button>
+                <button id="goToLogoutBtn">로그아웃</button>
+            </div>
         </nav>
     </header>
 
     <main class="welcome-section">
-        <p class="welcome-text"><span id="welcomeName"></span>님, 환영합니다!</p>
+        <p class="welcome-text"><span id="welcomeName"></span> 님,<br>환영합니다!</p>
         <!-- 이미지는 S3 버킷에 업로드 후 해당 URL로 변경해주세요. -->
-        <img src="https://s3.ap-northeast-2.amazonaws.com/img/" alt="환영 이미지" class="welcome-image">
+        <img src="https://cdn-web.infobip.com/uploads/2025/04/infobip-haas-f-hp-desktop-v-opt.png" alt="환영 이미지" class="welcome-image">
     </main>
 
     <footer>
         <p>&copy; 인포빕 데모 웹사이트</p>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script>
-        // 환영 메시지에 사용자 이름을 업데이트하는 함수입니다.
-        function updateWelcomeName(name = '') {
-            const welcomeNameSpan = document.getElementById('welcomeName');
-            if (name) {
-                welcomeNameSpan.textContent = `${name}`;
-            } else {
-                welcomeNameSpan.textContent = ''; // 이름이 없으면 빈 문자열
+<script src="js/script.js"></script>
+<script>
+    // Local Storage에서 사용자 ID를 추출하는 함수
+    function getUserIdFromSession() {
+        try {
+            // 'PE:state' 키로 저장된 데이터를 가져옴
+            const sessionData = localStorage.getItem('PE:state');
+            
+            if (!sessionData) {
+                console.log('세션 데이터가 없습니다.');
+                return null;
             }
+            
+            const parsedData = JSON.parse(sessionData);
+            const userId = parsedData?.person?.id;
+
+            return userId;
+        } catch (error) {
+            console.error('세션 데이터 파싱 중 오류:', error);
+            return null;
+        }
+    }
+
+    // DOM이 로드된 후 실행
+    document.addEventListener('DOMContentLoaded', function() {
+        // DOM 요소 가져오기
+        const welcomeNameSpan = document.getElementById('welcomeName');
+        
+        // 디버깅을 위한 콘솔 출력
+        console.log('welcomeNameSpan 요소:', welcomeNameSpan);
+        
+        // Local Storage에서 사용자 ID 추출
+        const sessionUserId = getUserIdFromSession();
+        
+        // 디버깅을 위한 콘솔 출력
+        console.log('sessionUserId:', sessionUserId);
+        
+        // 사용자 정보 표시
+        if (sessionUserId) {
+            welcomeNameSpan.textContent = sessionUserId;
+            console.log('Infobip: Person identified by ID from session:', sessionUserId);
+        } else {
+            welcomeNameSpan.textContent = "방문자";
+            console.log('세션에서 사용자 정보를 찾을 수 없습니다. 기본값으로 "방문자" 표시');
+        }
+        
+        // 로그인 버튼 이벤트 리스너
+        const loginBtn = document.getElementById('goToLoginBtn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', function () {
+                window.location.href = 'login.html';
+            });
         }
 
-        window.onload = function() {
-            // 웹사이트 로드 시 사용자 식별을 시도하고, 환영 메시지를 업데이트합니다.
-            // 실제 애플리케이션에서는 서버로부터 로그인한 사용자 정보를 가져와야 합니다.
-            // 여기서는 데모를 위해 하드코딩된 예시 값을 사용합니다.
-            const loggedInUser = { 
-                phone: '821092595897',
-                email: 'dillyson@naver.com'
-            };
+        const logoutBtn = document.getElementById('goToLogoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function () {
+                logout();
+            });
+        }
+    });
 
-            // Infobip People & Events Web SDK 초기화 및 Person 설정
-            // pe.setPerson()은 externalId가 없어도 email 또는 phone으로 Person을 식별할 수 있습니다.
-            // 따라서 `if (loggedInUser.externalId)` 조건문 없이 바로 호출합니다.
+    // 로그아웃 함수
+    async function logout() {
 
-            
-            pe.setPerson({ email: 'dillyson@naver.com' });
-            
-            // Person이 email/phone으로 식별되었음을 콘솔에 출력합니다.
-            console.log('Infobip: Person identified by email:', loggedInUser.email, 'and phone:', loggedInUser.phone);
-            
-            // 로그인 이벤트를 추적합니다. (페이지 로드 시 자동 로그인으로 간주)
-            pe.track('Login', { loginDate: new Date() });
-            // pe.track('Login', { method: 'automatic' }); 
-            
-            // 환영 메시지에 사용자의 전체 이름을 표시합니다.
-            updateWelcomeName(loggedInUser.email); 
-        };
-    </script>
+        localStorage.removeItem('PE:state');
+        console.log("로그아웃 버튼이 클릭되었습니다.");
+
+        // People SDK 로그아웃 처리
+        await pe.forgetPerson();
+
+        window.location.reload();
+    }
+</script>
 </body>
 </html>
