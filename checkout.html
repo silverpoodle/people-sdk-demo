@@ -56,11 +56,11 @@
             console.log('Infobip: Page Loaded event tracked for Checkout page.');
         };
 
-        function completePurchase() {
+        async function completePurchase() {
             // 실제로는 여기에서 결제 API 호출 로직이 들어가고, 성공 시 아래 코드를 실행합니다.
             // 데모이므로 바로 이벤트 추적 및 페이지 이동.
 
-            pe.track('CheckOut', { checkout: true });
+            await pe.track('CheckOut', { checkout: true });
             console.log('결제를 시도했습니다! 이벤트가 추적되었습니다.');
 
             // 결제 완료 이벤트 추적 후 paid.html 페이지로 리디렉션

@@ -64,13 +64,12 @@
         window.onload = function() {
             
             // 페이지 로드 이벤트 추적
-            // pe.track('Page Loaded', { page: 'Products', url: window.location.href });
             console.log('Infobip: Page Loaded event tracked for Products page.');
         };
 
-        function addProductToCart(productName, price) {
+        async function addProductToCart(productName, price) {
             // Infobip: 'Product Added' 이벤트 추적
-            pe.track('OnCart', {
+            await pe.track('OnCart', {
                 productName: productName,
                 productPrice: price,
                 cartQuantity: 1 // 예시: 1개
