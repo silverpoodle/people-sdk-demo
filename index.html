@@ -278,7 +278,7 @@
     // 로그아웃 함수
     async function logout() {
 
-        localStorage.removeItem('PE:state');
+        await localStorage.removeItem('PE:state');
         console.log("로그아웃 버튼이 클릭되었습니다.");
 
         // People SDK 로그아웃 처리
