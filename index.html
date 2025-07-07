@@ -278,11 +278,11 @@
     // 로그아웃 함수
     async function logout() {
 
-        await localStorage.removeItem('PE:state');
-        console.log("로그아웃 버튼이 클릭되었습니다.");
-
         // People SDK 로그아웃 처리
         await pe.forgetPerson();
+
+        await localStorage.removeItem('PE:state');
+        console.log("로그아웃 버튼이 클릭되었습니다.");
 
         window.location.reload();
     }
