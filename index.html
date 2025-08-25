@@ -100,6 +100,57 @@
             text-align: center;
         }
 
+        .product-category {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+
+        
+        .category-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .category-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-item {
+            flex: 1 1 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .category-image {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .category-name {
+            font-weight: bold;
+        }
+
         .footer-buttons {
             display: flex;
             justify-content: center;
@@ -285,6 +336,23 @@
 
     <main class="welcome-section">
         <p class="welcome-text"><span id="welcomeName"></span> 님,<br>환영합니다!</p>
+        <div class="product-category">
+            <h2 class="category-title">상품 카테고리</h2>
+            <div class="category-grid">
+                <a href="products.html" class="category-item">
+                    <img src="https://infobip-demo-website.s3.ap-northeast-2.amazonaws.com/img/food.jpg" alt="식품" class="category-image">
+                    <span class="category-name">식품</span>
+                </a>
+                <a href="products.html" class="category-item">
+                    <img src="https://infobip-demo-website.s3.ap-northeast-2.amazonaws.com/img/stationary.jpg" alt="문구" class="category-image">
+                    <span class="category-name">문구</span>
+                </a>
+                <a href="products.html" class="category-item">
+                    <img src="https://infobip-demo-website.s3.ap-northeast-2.amazonaws.com/img/electronics.jpg" alt="가전" class="category-image">
+                    <span class="category-name">가전</span>
+                </a>
+            </div>
+        </div>
         <img src="https://cdn-web.infobip.com/uploads/2025/04/infobip-haas-f-hp-desktop-v-opt.png" alt="환영 이미지" class="welcome-image">
     </main>
 
