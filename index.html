@@ -42,7 +42,7 @@
             padding: 0;
             margin: 0;
             display: flex;
-            gap: 15px; 
+            gap: 15px;
         }
 
         nav ul li a {
@@ -100,12 +100,64 @@
             text-align: center;
         }
 
-        footer {
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+
+        /* 인스타그램 버튼을 창 오른쪽 끝에 고정 */
+        .footer-icon {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            border: none;
+            padding: 0;
+            background: none;
             text-align: center;
-            padding: 20px;
-            background-color: #333;
             color: #fff;
-            margin-top: auto;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .footer-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-icon img:hover {
+            transform: scale(1.1);
+        }
+
+        /* 나머지 버튼들을 가운데 정렬 */
+        .footer-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
         }
 
         .welcome-section {
@@ -118,7 +170,7 @@
         }
 
         .welcome-text {
-            font-size: 3em; 
+            font-size: 3em;
             font-weight: bold;
             color: #007bff;
             margin-bottom: 30px;
@@ -136,46 +188,74 @@
             .welcome-text {
                 font-size: 2em;
             }
-            
+
             nav {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             nav ul {
                 order: 1;
             }
-            
+
             .nav-buttons {
                 order: 2;
                 flex-direction: column;
                 gap: 5px;
             }
+
+            .footer-icon {
+                left: 5px;
+                bottom: 5px;
+            }
+
+            .footer-icon img {
+                width: 40px;
+                height: 40px;
+            }
         }
-        
+
         @media (max-width: 480px) {
             .welcome-text {
                 font-size: 1.5em;
             }
+
             nav ul {
                 flex-direction: column;
                 gap: 5px;
             }
+
+            .footer-buttons {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+
+            .footer-icon {
+                right: 5px;
+                bottom: 10px;
+            }
+
+            .footer-icon img {
+                width: 35px;
+                height: 35px;
+            }
         }
     </style>
 
-    <!-- Infobip People & Events Web SDK Start -->
+    <script src="https://cdn.amplitude.com/script/92696750272b269bc3191209142500d8.js"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('92696750272b269bc3191209142500d8', {"fetchRemoteConfig":true,"autocapture":true});</script>
+
     <script>
     (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
     (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
 
-    // Infobip People & Events Web SDK API 키를 여기에 입력하세요.
-    // 이 키는 Infobip Portal에서 Web SDK용으로 발급받은 키여야 합니다.
     pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec');
     </script>
-    <!-- Infobip People & Events Web SDK End -->
-
-    <!-- Infobip Live Chat 챗봇 Start -->
+    
     <script>
     (function(I,n,f,o,b,i,p){
     I[b]=I[b]||function(){(I[b].q=I[b].q||[]).push(arguments)};
@@ -183,10 +263,10 @@
     p=n.getElementsByTagName(f)[0];p.parentNode.insertBefore(i,p)})
     (window,document,'script','https://livechat.infobip.com/widget.js','liveChat');
 
-    liveChat('init', 'e53f50d1-eb76-472a-ba8e-9f3d2cd48a41'); // 챗봇 위젯 초기화 코드
+    liveChat('init', 'e53f50d1-eb76-472a-ba8e-9f3d2cd48a41');
     </script>
-    <!-- Infobip Live Chat 챗봇 End -->
 
+  
 </head>
 <body>
     <header>
@@ -205,87 +285,27 @@
 
     <main class="welcome-section">
         <p class="welcome-text"><span id="welcomeName"></span> 님,<br>환영합니다!</p>
-        <!-- 이미지는 S3 버킷에 업로드 후 해당 URL로 변경해주세요. -->
         <img src="https://cdn-web.infobip.com/uploads/2025/04/infobip-haas-f-hp-desktop-v-opt.png" alt="환영 이미지" class="welcome-image">
     </main>
 
     <footer>
         <p>&copy; 인포빕 데모 웹사이트</p>
+
+        <div class="footer-buttons">
+            <!-- 가운데 버튼 묶음 -->
+            <div class="footer-links">
+                <a href="qna.html">✏️ 문의하기</a>
+                <a href="tel:07045192708">📞 고객센터</a>
+            </div>
+        </div>
+
+        <!-- Instagram button (창 왼쪽 끝에 고정) -->
+        <a href="https://www.instagram.com/infobipconversations?igsh=OW00MnV5ZHIzYmRr" target="_blank" class="footer-icon">
+            <img src="instagram.png" alt="Instagram" class="footer-img">
+        </a>
+
     </footer>
 
-<script src="js/script.js"></script>
-<script>
-    // Local Storage에서 사용자 ID를 추출하는 함수
-    function getUserIdFromSession() {
-        try {
-            // 'PE:state' 키로 저장된 데이터를 가져옴
-            const sessionData = localStorage.getItem('PE:state');
-            
-            if (!sessionData) {
-                console.log('세션 데이터가 없습니다.');
-                return null;
-            }
-            
-            const parsedData = JSON.parse(sessionData);
-            const userId = parsedData?.person?.id;
-
-            return userId;
-        } catch (error) {
-            console.error('세션 데이터 파싱 중 오류:', error);
-            return null;
-        }
-    }
-
-    // DOM이 로드된 후 실행
-    document.addEventListener('DOMContentLoaded', function() {
-        // DOM 요소 가져오기
-        const welcomeNameSpan = document.getElementById('welcomeName');
-        
-        // 디버깅을 위한 콘솔 출력
-        console.log('welcomeNameSpan 요소:', welcomeNameSpan);
-        
-        // Local Storage에서 사용자 ID 추출
-        const sessionUserId = getUserIdFromSession();
-        
-        // 디버깅을 위한 콘솔 출력
-        console.log('sessionUserId:', sessionUserId);
-        
-        // 사용자 정보 표시
-        if (sessionUserId) {
-            welcomeNameSpan.textContent = sessionUserId;
-            console.log('Infobip: Person identified by ID from session:', sessionUserId);
-        } else {
-            welcomeNameSpan.textContent = "방문자";
-            console.log('세션에서 사용자 정보를 찾을 수 없습니다. 기본값으로 "방문자" 표시');
-        }
-        
-        // 로그인 버튼 이벤트 리스너
-        const loginBtn = document.getElementById('goToLoginBtn');
-        if (loginBtn) {
-            loginBtn.addEventListener('click', function () {
-                window.location.href = 'login.html';
-            });
-        }
-
-        const logoutBtn = document.getElementById('goToLogoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function () {
-                logout();
-            });
-        }
-    });
-
-    // 로그아웃 함수
-    async function logout() {
-
-        // People SDK 로그아웃 처리
-        await pe.forgetPerson();
-
-        await localStorage.removeItem('PE:state');
-        console.log("로그아웃 버튼이 클릭되었습니다.");
-
-        window.location.reload();
-    }
-</script>
+    <script src="js/script.js"></script>
 </body>
 </html>
