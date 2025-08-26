@@ -286,7 +286,7 @@
         const apiUrl = `https://ejgdwr.api.infobip.com/people/2/persons?identifier=${identifier}&type=PHONE`;
         try {
           const response = await fetch(apiUrl, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
               'Authorization': 'App 8370536f468242d2bef67e8f832dd9d3-6cab6484-13e1-4d3e-8114-3b83bef5bf19',
               'Content-Type': 'application/json',
