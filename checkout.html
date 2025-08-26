@@ -1,71 +1,314 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CheckOut</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>장바구니 확인</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      background-color: #f4f7f6;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 1em 0;
+      text-align: center;
+    }
+    header h1 { margin: 0; }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-    <!-- Infobip Web SDK Start -->
-    <script>
-    (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
-    (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+    /* 카트이탈 버튼 - 새 디자인 */
+    #cart-abandonment-btn {
+      background: linear-gradient(135deg, #ff6a6a, #dc3545);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    #cart-abandonment-btn:hover {
+      background: linear-gradient(135deg, #e63946, #b71c1c);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+    }
 
-    pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec'); // <-- 실제 API 키를 입력하세요!
-    </script>
-    <!-- Infobip Web SDK End -->
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-    <!-- Infobip Live Chat 챗봇 Start -->
-    <script>
-    (function(I,n,f,o,b,i,p){
-    I[b]=I[b]||function(){(I[b].q=I[b].q||[]).push(arguments)};
-    I[b].t=1*new Date();i=n.createElement(f);i.async=1;i.src=o;
-    p=n.getElementsByTagName(f)[0];p.parentNode.insertBefore(i,p)})
-    (window,document,'script','https://livechat.infobip.com/widget.js','liveChat');
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr 120px 150px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .item-name { font-weight: bold; }
 
-    liveChat('init', 'e53f50d1-eb76-472a-ba8e-9f3d2cd48a41'); // 챗봇 위젯 초기화 코드
-    </script>
-    <!-- Infobip Live Chat 챗봇 End -->
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      font-size: 1.2rem;
+      line-height: 28px;
+    }
+    .item-quantity {
+      padding: 0 15px;
+      font-size: 1.1rem;
+    }
+    .item-subtotal {
+      text-align: right;
+      font-weight: bold;
+      color: #333;
+    }
 
+    .summary {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #333;
+      text-align: right;
+    }
+    .summary p {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0 0 20px 0;
+    }
+    #proceed-to-payment-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #proceed-to-payment-btn:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+
+  <!-- PeopleEvents SDK -->
+  <script>
+    (function(e,t,n,o){
+      e.PeopleEventsObject=o;
+      e[o]=e[o]||{
+        init:function(t){e[o].apiKey=t},
+        setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},
+        forgetPerson:function(){e[o].toForgetPerson=true},
+        track:function(){(e[o].q=e[o].q||[]).push(arguments)},
+        updatePerson:function(t){e[o].personToUpdate={person:t}},
+        appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}
+      };
+      var r=t.createElement("script");
+      var s=t.getElementsByTagName("script")[0];
+      r.async=1;r.src=n;s.parentNode.insertBefore(r,s)
+    })(window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+    pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec');
+  </script>
+  <script src="https://cdn.amplitude.com/script/92696750272b269bc3191209142500d8.js"></script>
+  <script>
+    window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+    window.amplitude.init('92696750272b269bc3191209142500d8', {
+      fetchRemoteConfig:true,
+      autocapture:true
+    });
+  </script>
 </head>
 <body>
-    <header>
-        <h1>결제페이지</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">홈</a></li>
-                <li><a href="products.html">상품</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>장바구니</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="products.html">상품</a></li>
+      </ul>
+      <button id="cart-abandonment-btn">카트이탈</button>
+    </nav>
+  </header>
 
-    <main>
-        <p>결제를 진행합니다.</p>
-        <p>총 결제 금액: ₩35,000</p>
-        <button onclick="completePurchase()">결제 완료</button>
-    </main>
+  <main>
+    <h2>주문 내역 확인</h2>
+    <div id="cart-items-container"></div>
+    <div class="summary">
+      <p>합계: <span id="total-price-display">₩0</span></p>
+      <button id="proceed-to-payment-btn">결제 페이지로 이동</button>
+    </div>
+  </main>
 
-    <footer>
-        <p>&copy; 인포빕 데모 웹사이트</p>
-    </footer>
+  <footer>
+    <p>&copy; 인포빕 데모 웹사이트</p>
+  </footer>
 
-    <script src="js/script.js"></script>
-    <script>
-        window.onload = function() {
-            // pe.track('Page Loaded', { page: 'Checkout', url: window.location.href });
-            console.log('Infobip: Page Loaded event tracked for Checkout page.');
-        };
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const paymentButton = document.getElementById('proceed-to-payment-btn');
+      let totalPrice = 0;
 
-        async function completePurchase() {
-            // 실제로는 여기에서 결제 API 호출 로직이 들어가고, 성공 시 아래 코드를 실행합니다.
-            // 데모이므로 바로 이벤트 추적 및 페이지 이동.
+      function displayCartItems() {
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const container = document.getElementById('cart-items-container');
+        const totalPriceDisplay = document.getElementById('total-price-display');
 
-            await pe.track('CheckOut', { checkout: true });
-            console.log('결제를 시도했습니다! 이벤트가 추적되었습니다.');
+        container.innerHTML = '';
+        totalPrice = 0;
 
-            // 결제 완료 이벤트 추적 후 paid.html 페이지로 리디렉션
-            window.location.href = 'paid.html';
+        if (cartItems.length === 0) {
+          container.innerHTML = '<p>장바구니가 비어있습니다. 상품 페이지에서 상품을 담아주세요.</p>';
+          paymentButton.disabled = true;
+        } else {
+          cartItems.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            totalPrice += subtotal;
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('cart-item');
+            itemElement.innerHTML = `
+              <span class="item-name">${item.name} (${item.price.toLocaleString()}원)</span>
+              <div class="quantity-controls">
+                <button class="quantity-btn minus-btn" data-id="${item.id}">-</button>
+                <span class="item-quantity">${item.quantity}</span>
+                <button class="quantity-btn plus-btn" data-id="${item.id}">+</button>
+              </div>
+              <span class="item-subtotal">${subtotal.toLocaleString()}원</span>
+            `;
+            container.appendChild(itemElement);
+          });
+          paymentButton.disabled = false;
         }
-    </script>
+
+        totalPriceDisplay.textContent = `₩${totalPrice.toLocaleString()}`;
+        addEventListenersToButtons();
+      }
+
+      function addEventListenersToButtons() {
+        document.querySelectorAll('.plus-btn, .minus-btn').forEach(button => {
+          button.addEventListener('click', (e) => {
+            updateCart(e.target.dataset.id, e.target.classList.contains('plus-btn') ? 1 : -1);
+          });
+        });
+      }
+
+      function updateCart(productId, change) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const idx = cart.findIndex(item => item.id === productId);
+
+        if (idx !== -1) {
+          cart[idx].quantity += change;
+          if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCartItems();
+      }
+
+      paymentButton.addEventListener('click', async function() {
+        if (typeof pe === 'undefined' || !pe.track) {
+          alert('결제 기능을 사용할 수 없습니다. 잠시 후 다시 시도해주세요.');
+          return;
+        }
+        try {
+          await pe.track('PurchaseComplete', {
+            date: new Date().toISOString(),
+            price: totalPrice
+          });
+          window.location.href = 'paid.html';
+        } catch (error) {
+          console.error('Tracking error:', error);
+          alert('결제 처리 중 오류가 발생했습니다.');
+        }
+      });
+
+    function getUserIdFromPEState() {
+        try {
+            const stored = localStorage.getItem('PE:state');
+            if (!stored) return null;
+            const parsed = JSON.parse(stored);
+            return parsed?.person?.id || null;
+        } catch (e) {
+            console.error('Failed to parse PE:state:', e);
+            return null;
+        }
+    }
+
+      // 카트이탈 버튼
+      document.getElementById('cart-abandonment-btn').addEventListener('click', async function() {
+        const identifier = getUserIdFromPEState();
+        const apiUrl = `https://ejgdwr.api.infobip.com/people/2/persons?identifier=${identifier}&type=PHONE`;
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              'Authorization': 'App 8370536f468242d2bef67e8f832dd9d3-6cab6484-13e1-4d3e-8114-3b83bef5bf19',
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ "customAttributes": { "Cart Abandonment": true } })
+          });
+
+          if (response.ok) {
+            alert('카트이탈 속성이 업데이트되었습니다.');
+          } else {
+            const errorData = await response.json();
+            alert('카트이탈 속성 업데이트 실패: ' + (errorData.message || response.statusText));
+          }
+        } catch (error) {
+          alert('네트워크 오류 또는 API 호출 실패: ' + error.message);
+        }
+      });
+
+      // 초기 표시
+      displayCartItems();
+    });
+  </script>
 </body>
 </html>

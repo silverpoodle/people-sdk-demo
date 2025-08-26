@@ -1,115 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인</title>
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #333;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    header {
-        background-color: #333;
-        color: #fff;
-        padding: 1em 0;
-        text-align: center;
-    }
-
-    header h1 {
-        margin: 0;
-    }
-
-    main {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .login-container {
-        background-color: #fff;
-        padding: 40px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        max-width: 400px;
-        width: 100%;
-    }
-
-    .login-title {
-        text-align: center;
-        margin-bottom: 30px;
-        color: #333;
-        font-size: 24px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        color: #333;
-        font-weight: bold;
-    }
-
-    input[type="email"] {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-
-    input[type="email"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    .login-btn {
-        width: 100%;
-        padding: 12px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .login-btn:hover {
-        background-color: #0056b3;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
-        background-color: #333;
-        color: #fff;
-        margin-top: auto;
-    }
-
-    @media (max-width: 768px) {
-        .login-container {
-            padding: 30px 20px;
-            margin: 0 20px;
-        }
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; min-height: 100vh; display: flex; flex-direction: column; }
+        header { background-color: #333; color: #fff; padding: 1em 0; text-align: center; }
+        header h1 { margin: 0; }
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-container { background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; width: 100%; }
+        .login-title { text-align: center; margin-bottom: 30px; color: #333; font-size: 24px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #333; font-weight: bold; }
+        input[type="tel"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; box-sizing: border-box; }
+        input[type="tel"]:focus { outline: none; border-color: #007bff; }
+        .login-btn { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease; }
+        .login-btn:hover { background-color: #0056b3; }
+        footer { text-align: center; padding: 20px; background-color: #333; color: #fff; margin-top: auto; }
     </style>
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- Infobip People & Events Web SDK -->
     <script>
         (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},
         setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},
@@ -120,23 +30,23 @@
         var r=t.createElement("script");
         var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
         (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
-
         pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec');
     </script>
+    <script src="https://cdn.amplitude.com/script/92696750272b269bc3191209142500d8.js"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('92696750272b269bc3191209142500d8', {"fetchRemoteConfig":true,"autocapture":true});</script>
 </head>
 <body>
-  <header>
-    <h1>로그인</h1>
-  </header>
+    <header>
+        <h1>로그인</h1>
+    </header>
 
-  <main>
+    <main>
         <div class="login-container">
             <form id="loginForm">
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required>
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" required>
                 </div>
-                <button type="button" class="login-btn" onclick="loginWithEmail()">
+                <button type="submit" class="login-btn">
                     Login
                 </button>
             </form>
@@ -147,32 +57,6 @@
         <p>&copy; Infobip Demo Website</p>
     </footer>
 
-    <script>
-        async function loginWithEmail() {
-            const email = document.getElementById('email').value;
-            if (email) {
-                try {
-                    // setPerson이 완료될 때까지 기다립니다
-                    await pe.setPerson({ email: email });
-                    
-                    // 로그인 이벤트를 추적합니다
-                    await pe.track('Login', { loginDate: new Date() });
-                    await pe.track('lastlogin', {timestamp: new Date() })
-                    
-                    // 모든 작업이 완료된 후 페이지를 이동합니다
-                    window.location.href = 'index.html';
-                } catch (error) {
-                    console.error('로그인 처리 중 오류 발생:', error);
-                }
-            }
-        }
-
-        // Enter 키로 로그인
-        document.getElementById('email').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                loginWithEmail();
-            }
-        });
-    </script>
+    <script src="js/login.js"></script> 
 </body>
 </html>

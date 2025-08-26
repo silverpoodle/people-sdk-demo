@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            margin: 20px auto 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: calc(100% - 40px);
+            text-align: center; /* 폼이 가운데 정렬되도록 */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            margin-top: auto;
+        }
+
+        /* 폼 컨테이너 스타일 (필요시 추가) */
+        #form-bfaa61d7-5f64-4e1b-9b24-0eb069d50d91 {
+            margin-top: 30px; /* 상단 여백 */
+            padding: 20px; /* 폼 자체의 패딩 */
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+    <script>
+        (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+        (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+
+        pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec');
+    </script>
+    <script>
+        (function(I,n,f,o,b,i,p){
+        I[b]=I[b]||function(){(I[b].q=I[b].q||[]).push(arguments)};
+        I[b].t=1*new Date();i=n.createElement(f);i.async=1;i.src=o;
+        p=n.getElementsByTagName(f)[0];p.parentNode.insertBefore(i,p)})
+        (window,document,'script','https://livechat.infobip.com/widget.js','liveChat');
+
+        liveChat('init', 'e53f50d1-eb76-472a-ba8e-9f3d2cd48a41'); // 챗봇 위젯 초기화 코드
+        </script>
+    </head>
+<body>
+    <header>
+        <h1>문의하기</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="products.html">상품</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>무엇이든 물어보세요!</h2>
+        <!-- <div id="form-b4496064-00b1-432a-a265-751656a17467"></div>
+        <script async src="https://forms.infobip.com/forms/b4496064-00b1-432a-a265-751656a17467.js"></script> -->
+        <div id="form-dacd974e-d152-434e-9ab7-6ab8b50ceb88"></div>
+        <script async src="https://forms.infobip.com/forms/dacd974e-d152-434e-9ab7-6ab8b50ceb88.js"></script>
+    </main>
+
+    <footer>
+        <p>&copy; 인포빕 데모 웹사이트</p>
+        <a href="index.html">홈으로 돌아가기</a>
+    </footer>
+</body>
+</html>
