@@ -102,10 +102,14 @@
         }
     </style>
     <script>
-        (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},forgetPerson:function(){e[o].toForgetPerson=true},track:function(){(e[o].q=e[o].q||[]).push(arguments)},updatePerson:function(t){e[o].personToUpdate={person:t}},appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};var r=t.createElement("script");var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
-        (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
-
-        pe.init('308b663d96a0bd726a753d1ab273ef1b-3574271f-f908-4119-9f5e-d7fef26938ec');
+    (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},
+    setPerson:function(t,n){e[o].person=t;e[o].personTtl=n}, forgetPerson:function(){e[o].toForgetPerson=true},
+    track:function(){(e[o].q=e[o].q||[]).push(arguments)}, updatePerson:function(t){e[o].personToUpdate={person:t}}, appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};
+    var r=t.createElement("script");
+    var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+    (window,document,"https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js","pe");
+    
+    pe.init('dc363ea38b48d0f77453249e30d09066-ca488001-a87f-4523-96e7-d89f8cd39668');
     </script>
     <script>
         (function(I,n,f,o,b,i,p){
