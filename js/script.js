@@ -37,10 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
   async function fetchCustomerInfo(userId) {
     if (!userId) return null;
 
-    const apiUrl = `https://ejgdwr.api.infobip.com/people/2/persons?type=PHONE&identifier=` + userId;
+    //const apiUrl = `https://ejgdwr.api.infobip.com/people/2/persons?type=PHONE&identifier=` + userId;
+    //const headers = {
+    //  'Content-Type': 'application/json',
+    //  'Authorization': 'App 8370536f468242d2bef67e8f832dd9d3-6cab6484-13e1-4d3e-8114-3b83bef5bf19'
+    //};
+      
+    const apiUrl = `https://16jmn.api.infobip.com/people/2/persons?type=PHONE&identifier=` + userId;
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'App 8370536f468242d2bef67e8f832dd9d3-6cab6484-13e1-4d3e-8114-3b83bef5bf19'
+      'Authorization': 'App 9460cf090ed9bee037d3b5fab94bdd03-b87b08f3-957a-4cb6-9f4f-deeb07f9ab89'
     };
 
     try {
