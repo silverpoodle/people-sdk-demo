@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         localStorage.setItem('userFirstName', userData.firstName);
                         localStorage.setItem('userLastName', userData.lastName);
+                        localStorage.setItem('userMobile', mobile);
 
                         const peStateRaw = localStorage.getItem('PE:state');
                         if (peStateRaw) {
